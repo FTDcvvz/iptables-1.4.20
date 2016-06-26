@@ -35,7 +35,7 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <string.h>
-#include <iptables.h>
+#include <iptables.h>	//在iptables.h中包含librt4c.h
 #include "iptables-multi.h"
 
 int
@@ -44,6 +44,7 @@ iptables_main(int argc, char *argv[])
 	int ret;
 	char *table = "filter";
 	struct xtc_handle *handle = NULL;
+	struct rtc_handle *rthandle = NULL;    		//rtc_handle
 
 	iptables_globals.program_name = "iptables";
 	ret = xtables_init_all(&iptables_globals, NFPROTO_IPV4);
@@ -58,10 +59,15 @@ iptables_main(int argc, char *argv[])
 	init_extensions4();
 #endif
 
-	ret = do_command4(argc, argv, &table, &handle, false);
+	ret = do_command4(argc, argv, &table, &handle, &rthandle, false);
 	if (ret) {
 		ret = iptc_commit(handle);
+
+		ret &= rtc_commit(rthandle);
+
 		iptc_free(handle);
+
+		rtc_free(rthandle);
 	}
 
 	if (!ret) {
