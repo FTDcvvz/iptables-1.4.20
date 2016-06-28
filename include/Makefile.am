@@ -9,4 +9,5 @@ endif
 
 nobase_include_HEADERS += \
 	libiptc/ipt_kernel_headers.h libiptc/libiptc.h \
-	libiptc/libip6tc.h libiptc/libxtc.h libiptc/xtcshared.h
+	libiptc/libip6tc.h libiptc/libxtc.h libiptc/xtcshared.h \
+	librtc/librt4c.h librtc/librt6c.h

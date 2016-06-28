@@ -160,6 +160,8 @@ AC_CONFIG_FILES([Makefile extensions/GNUmakefile include/Makefile
 	libipq/Makefile libipq/libipq.pc
 	libiptc/Makefile libiptc/libiptc.pc
 	libiptc/libip4tc.pc libiptc/libip6tc.pc
+	librtc/Makefile librtc/librtc.pc
+	librtc/librt4c.pc librtc/librt6c.pc
 	libxtables/Makefile utils/Makefile
 	include/xtables-version.h include/iptables/internal.h])
 AC_OUTPUT

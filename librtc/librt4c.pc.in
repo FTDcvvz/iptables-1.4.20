@@ -1,0 +1,10 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name:		librt4c
+Description:	iptables IPv4 ruletable ADT and kernel interface
+Version:	@PACKAGE_VERSION@
+Libs:		-L${libdir} -lrt4c
+Cflags:		-I${includedir}

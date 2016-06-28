@@ -1,0 +1,10 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name:		librt4c
+Description:	iptables IPv4 ruletable ADT and kernel interface
+Version:	1.4.20
+Libs:		-L${libdir} -lrt4c
+Cflags:		-I${includedir}

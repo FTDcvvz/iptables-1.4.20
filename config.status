@@ -393,7 +393,7 @@ on `(hostname || uname -n) 2>/dev/null | sed 1q`
 "
 
 # Files that config.status was made for.
-config_files=" Makefile extensions/GNUmakefile include/Makefile iptables/Makefile iptables/xtables.pc iptables/iptables.8 iptables/ip6tables.8 iptables/iptables-extensions.8.tmpl libipq/Makefile libipq/libipq.pc libiptc/Makefile libiptc/libiptc.pc libiptc/libip4tc.pc libiptc/libip6tc.pc libxtables/Makefile utils/Makefile include/xtables-version.h include/iptables/internal.h"
+config_files=" Makefile extensions/GNUmakefile include/Makefile iptables/Makefile iptables/xtables.pc iptables/iptables.8 iptables/ip6tables.8 iptables/iptables-extensions.8.tmpl libipq/Makefile libipq/libipq.pc libiptc/Makefile libiptc/libiptc.pc libiptc/libip4tc.pc libiptc/libip6tc.pc librtc/Makefile librtc/librtc.pc librtc/librt4c.pc librtc/librt6c.pc libxtables/Makefile utils/Makefile include/xtables-version.h include/iptables/internal.h"
 config_headers=" config.h"
 config_commands=" depfiles libtool"
 
@@ -437,7 +437,7 @@ Copyright (C) 2012 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
-ac_pwd='/home/ftdchenwz/iptables-1.4.20'
+ac_pwd='/home/chenwz/iptables-1.4.20'
 srcdir='.'
 INSTALL='/usr/bin/install -c'
 MKDIR_P='/bin/mkdir -p'
@@ -761,6 +761,10 @@ do
     "libiptc/libiptc.pc") CONFIG_FILES="$CONFIG_FILES libiptc/libiptc.pc" ;;
     "libiptc/libip4tc.pc") CONFIG_FILES="$CONFIG_FILES libiptc/libip4tc.pc" ;;
     "libiptc/libip6tc.pc") CONFIG_FILES="$CONFIG_FILES libiptc/libip6tc.pc" ;;
+    "librtc/Makefile") CONFIG_FILES="$CONFIG_FILES librtc/Makefile" ;;
+    "librtc/librtc.pc") CONFIG_FILES="$CONFIG_FILES librtc/librtc.pc" ;;
+    "librtc/librt4c.pc") CONFIG_FILES="$CONFIG_FILES librtc/librt4c.pc" ;;
+    "librtc/librt6c.pc") CONFIG_FILES="$CONFIG_FILES librtc/librt6c.pc" ;;
     "libxtables/Makefile") CONFIG_FILES="$CONFIG_FILES libxtables/Makefile" ;;
     "utils/Makefile") CONFIG_FILES="$CONFIG_FILES utils/Makefile" ;;
     "include/xtables-version.h") CONFIG_FILES="$CONFIG_FILES include/xtables-version.h" ;;
@@ -922,22 +926,26 @@ S["CPPFLAGS"]=""
 S["LDFLAGS"]=""
 S["CFLAGS"]="-g -O2"
 S["CC"]="gcc"
+S["AM_BACKSLASH"]="\\"
+S["AM_DEFAULT_VERBOSITY"]="1"
+S["AM_DEFAULT_V"]="$(AM_DEFAULT_VERBOSITY)"
+S["AM_V"]="$(V)"
 S["am__untar"]="$${TAR-tar} xf -"
 S["am__tar"]="$${TAR-tar} chof - \"$$tardir\""
 S["AMTAR"]="$${TAR-tar}"
 S["am__leading_dot"]="."
 S["SET_MAKE"]=""
 S["AWK"]="mawk"
-S["mkdir_p"]="/bin/mkdir -p"
+S["mkdir_p"]="$(MKDIR_P)"
 S["MKDIR_P"]="/bin/mkdir -p"
 S["INSTALL_STRIP_PROGRAM"]="$(install_sh) -c -s"
 S["STRIP"]="strip"
-S["install_sh"]="${SHELL} /home/ftdchenwz/iptables-1.4.20/build-aux/install-sh"
-S["MAKEINFO"]="${SHELL} /home/ftdchenwz/iptables-1.4.20/build-aux/missing --run makeinfo"
-S["AUTOHEADER"]="${SHELL} /home/ftdchenwz/iptables-1.4.20/build-aux/missing --run autoheader"
-S["AUTOMAKE"]="${SHELL} /home/ftdchenwz/iptables-1.4.20/build-aux/missing --run automake-1.11"
-S["AUTOCONF"]="${SHELL} /home/ftdchenwz/iptables-1.4.20/build-aux/missing --run autoconf"
-S["ACLOCAL"]="${SHELL} /home/ftdchenwz/iptables-1.4.20/build-aux/missing --run aclocal-1.11"
+S["install_sh"]="${SHELL} /home/chenwz/iptables-1.4.20/build-aux/install-sh"
+S["MAKEINFO"]="makeinfo"
+S["AUTOHEADER"]="autoheader"
+S["AUTOMAKE"]="automake-1.14"
+S["AUTOCONF"]="autoconf"
+S["ACLOCAL"]="aclocal-1.14"
 S["VERSION"]="1.4.20"
 S["PACKAGE"]="iptables"
 S["CYGPATH_W"]="echo"
@@ -1372,7 +1380,7 @@ $as_echo "$as_me: executing $ac_file commands" >&6;}
 
   case $ac_file$ac_mode in
     "depfiles":C) test x"$AMDEP_TRUE" != x"" || {
-  # Autoconf 2.62 quotes --file arguments for eval, but not when files
+  # Older Autoconf quotes --file arguments for eval, but not when files
   # are listed without --file.  Let's play safe and only enable the eval
   # if we detect the quoting.
   case $CONFIG_FILES in
@@ -1385,7 +1393,7 @@ $as_echo "$as_me: executing $ac_file commands" >&6;}
     # Strip MF so we end up with the name of the file.
     mf=`echo "$mf" | sed -e 's/:.*$//'`
     # Check whether this is an Automake generated Makefile or not.
-    # We used to match only the files named `Makefile.in', but
+    # We used to match only the files named 'Makefile.in', but
     # some people rename them; so instead we look at the file content.
     # Grep'ing the first line is not enough: some people post-process
     # each Makefile.in and add a new line on top of each file to say so.
@@ -1419,21 +1427,19 @@ $as_echo X"$mf" |
       continue
     fi
     # Extract the definition of DEPDIR, am__include, and am__quote
-    # from the Makefile without running `make'.
+    # from the Makefile without running 'make'.
     DEPDIR=`sed -n 's/^DEPDIR = //p' < "$mf"`
     test -z "$DEPDIR" && continue
     am__include=`sed -n 's/^am__include = //p' < "$mf"`
-    test -z "am__include" && continue
+    test -z "$am__include" && continue
     am__quote=`sed -n 's/^am__quote = //p' < "$mf"`
-    # When using ansi2knr, U may be empty or an underscore; expand it
-    U=`sed -n 's/^U = //p' < "$mf"`
     # Find all dependency output files, they are included files with
     # $(DEPDIR) in their names.  We invoke sed twice because it is the
     # simplest approach to changing $(DEPDIR) to its actual value in the
     # expansion.
     for file in `sed -n "
       s/^$am__include $am__quote\(.*(DEPDIR).*\)$am__quote"'$/\1/p' <"$mf" | \
-	 sed -e 's/\$(DEPDIR)/'"$DEPDIR"'/g' -e 's/\$U/'"$U"'/g'`; do
+	 sed -e 's/\$(DEPDIR)/'"$DEPDIR"'/g'`; do
       # Make sure the directory exists.
       test -f "$dirpart/$file" && continue
       fdir=`$as_dirname -- "$file" ||

@@ -13,13 +13,13 @@ if ENABLE_IPV4
 xtables_multi_SOURCES += iptables-save.c iptables-restore.c \
                          iptables-standalone.c iptables.c
 xtables_multi_CFLAGS  += -DENABLE_IPV4
-xtables_multi_LDADD   += ../libiptc/libip4tc.la ../extensions/libext4.a
+xtables_multi_LDADD   += ../libiptc/libip4tc.la ../extensions/libext4.a ../librtc/librt4c.la
 endif
 if ENABLE_IPV6
 xtables_multi_SOURCES += ip6tables-save.c ip6tables-restore.c \
                           ip6tables-standalone.c ip6tables.c
 xtables_multi_CFLAGS  += -DENABLE_IPV6
-xtables_multi_LDADD   += ../libiptc/libip6tc.la ../extensions/libext6.a
+xtables_multi_LDADD   += ../libiptc/libip6tc.la ../extensions/libext6.a ../librtc/librt6c.la
 endif
 xtables_multi_SOURCES += xshared.c
 xtables_multi_LDADD   += ../libxtables/libxtables.la -lm

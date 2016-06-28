@@ -1,0 +1,3 @@
+librt6c.lo: librt6c.c /usr/include/stdc-predef.h
+
+/usr/include/stdc-predef.h:

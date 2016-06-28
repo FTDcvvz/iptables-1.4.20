@@ -77,8 +77,9 @@ xtables_multi-iptables.o: iptables.c /usr/include/stdc-predef.h \
  /usr/include/netinet/ip_icmp.h /usr/include/netinet/tcp.h \
  /usr/include/netinet/udp.h ../include/linux/netfilter_ipv4/ip_tables.h \
  ../include/linux/netfilter_ipv4.h ../include/linux/netfilter/xt_tcpudp.h \
- ../include/libiptc/xtcshared.h ../include/iptables/internal.h \
- /usr/include/fcntl.h /usr/include/x86_64-linux-gnu/bits/fcntl.h \
+ ../include/libiptc/xtcshared.h ../include/librtc/librt4c.h \
+ ../include/iptables/internal.h /usr/include/fcntl.h \
+ /usr/include/x86_64-linux-gnu/bits/fcntl.h \
  /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
  /usr/include/x86_64-linux-gnu/bits/stat.h \
  /usr/include/x86_64-linux-gnu/bits/fcntl2.h xshared.h \
@@ -308,6 +309,8 @@ xtables_multi-iptables.o: iptables.c /usr/include/stdc-predef.h \
 ../include/linux/netfilter/xt_tcpudp.h:
 
 ../include/libiptc/xtcshared.h:
+
+../include/librtc/librt4c.h:
 
 ../include/iptables/internal.h:
 

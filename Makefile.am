@@ -3,7 +3,7 @@
 ACLOCAL_AMFLAGS  = -I m4
 AUTOMAKE_OPTIONS = foreign subdir-objects
 
-SUBDIRS          = libiptc libxtables
+SUBDIRS          = libiptc libxtables librtc
 if ENABLE_DEVEL
 SUBDIRS         += include
 endif

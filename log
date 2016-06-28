@@ -1,0 +1,12 @@
+xtables_multi-iptables-standalone.o: In function `iptables_main':
+/home/chenwz/iptables-1.4.20/iptables/iptables-standalone.c:66: undefined reference to `rtc_commit'
+/home/chenwz/iptables-1.4.20/iptables/iptables-standalone.c:70: undefined reference to `rtc_free'
+xtables_multi-iptables.o: In function `do_command4':
+/home/chenwz/iptables-1.4.20/iptables/iptables.c:1926: undefined reference to `rtc_set_policy'
+/home/chenwz/iptables-1.4.20/iptables/iptables.c:1755: undefined reference to `rtc_init'
+xtables_multi-iptables.o: In function `append_entry':
+/home/chenwz/iptables-1.4.20/iptables/iptables.c:651: undefined reference to `rtc_append'
+collect2: error: ld returned 1 exit status
+make[2]: *** [xtables-multi] Error 1
+make[1]: *** [all-recursive] Error 1
+make: *** [all] Error 2

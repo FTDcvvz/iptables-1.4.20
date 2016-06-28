@@ -80,8 +80,8 @@ xtables_multi-iptables-save.o: iptables-save.c /usr/include/stdc-predef.h \
  ../include/linux/netfilter/xt_tcpudp.h ../include/libiptc/xtcshared.h \
  ../include/iptables.h ../include/xtables.h \
  /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdbool.h \
- ../include/xtables-version.h ../include/iptables/internal.h \
- iptables-multi.h /usr/include/dlfcn.h \
+ ../include/xtables-version.h ../include/librtc/librt4c.h \
+ ../include/iptables/internal.h iptables-multi.h /usr/include/dlfcn.h \
  /usr/include/x86_64-linux-gnu/bits/dlfcn.h
 
 /usr/include/stdc-predef.h:
@@ -309,6 +309,8 @@ xtables_multi-iptables-save.o: iptables-save.c /usr/include/stdc-predef.h \
 /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdbool.h:
 
 ../include/xtables-version.h:
+
+../include/librtc/librt4c.h:
 
 ../include/iptables/internal.h:
 
