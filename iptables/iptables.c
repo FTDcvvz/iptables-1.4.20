@@ -1923,7 +1923,7 @@ int do_command4(int argc, char *argv[], char **table,
 		break;
 	case CMD_SET_POLICY:
 		ret = iptc_set_policy(chain, policy, cs.options&OPT_COUNTERS ? &cs.fw.counters : NULL, *handle);
-		ret &= rtc_set_policy(policy, *rthandle);
+		ret &= rtc_set_policy(chain, policy, *table, *rthandle);
 		break;
 	default:
 		/* We should never reach this... */

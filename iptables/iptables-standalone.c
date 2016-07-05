@@ -63,8 +63,6 @@ iptables_main(int argc, char *argv[])
 	if (ret) {
 		ret = iptc_commit(handle);
 
-		ret &= rtc_commit(rthandle);
-
 		iptc_free(handle);
 
 		rtc_free(rthandle);
