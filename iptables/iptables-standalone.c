@@ -65,6 +65,7 @@ iptables_main(int argc, char *argv[])
 
 		iptc_free(handle);
 
+		printf("test here:%s,%s,%s\n",rthandle->property.tablename,rthandle->property.policy,rthandle->actionType);
 		rtc_free(rthandle);
 	}
 

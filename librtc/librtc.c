@@ -14,6 +14,32 @@ struct rtc_handle{
 	struct list_head * head;
 };
 
+static ruletable * find_policy_place(const char * chain ,const char * tablename, struct rtc_handle *handle)
+{
+	//find tablename(filter nat mangle)
+	struct list_head * plist;
+	ruletable * rt;
+	int flag = 0;
+	list_for_each(plist,handle->head){
+		rt = list_entry(plist,ruletable,list);
+		if(strcmp(rt->property.tablename,tablename) == 0)
+			break; 
+	}
+	//find chain(input output forward...)
+	list_for_each(plist,(rt->list).prev){
+		rt = list_entry(plist,ruletable,list);
+		if(strcmp(rt->actionType,chain)==0)
+			flag = 1;
+		else {
+			if(flag == 1)   //we'v got to the end of the "chain"(input/output/forward)
+				break;
+		}		
+	}
+	//set policy at the right place 
+	plist = (rt->list).prev;
+	rt = list_entry(plist,ruletable,list);
+} 
+
 struct rtc_handle *
 RTC_INIT(){
 	int    sockfd, n;
@@ -68,8 +94,13 @@ RTC_FREE(struct rtc_handle *h){
 }
 
 int 
-RTC_SET_POLICY(const char * policy, struct rtc_handle *handle){
-	printf("%s\ntest succeed\n",policy);
+RTC_SET_POLICY(const char * chain ,const char * policy,const char * tablename, struct rtc_handle *handle){
+	
+	rultable * rt ;
+	rt = find_policy_place(chain,tablename,handle);
+	rt->property = {tablename,policy};
+	rt->actionType = chain;
+
 	return 1;
 }
 
