@@ -89,6 +89,7 @@ RTC_INIT(){
 
     close(sockfd);
     free(buffer);
+  //  printf("rtc_init \n");
     return rthandle;
 }
 
@@ -98,7 +99,8 @@ RTC_FREE(struct rtc_handle *h){
 }
 
 int 
-RTC_SET_POLICY(const char * chain ,const char * policy,const char * tablename, struct rtc_handle *handle){	
+RTC_SET_POLICY(const char * chain ,const char * policy,const char * tablename, struct rtc_handle *handle){
+ 	printf("test\n");	
 	ruletable * rt = NULL;
 	if((rt = find_policy_place(chain,tablename,handle)) == NULL){
 		printf("find policy place error\n");

@@ -1329,6 +1329,7 @@ retry:
 
 	strcpy(info.name, tablename);
 	if (getsockopt(sockfd, TC_IPPROTO, SO_GET_INFO, &info, &s)< 0) {
+		printf("%d\n",errno);
 		close(sockfd);
 		return NULL;
 	}

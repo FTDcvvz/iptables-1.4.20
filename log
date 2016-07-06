@@ -1,12 +1,184 @@
-xtables_multi-iptables-standalone.o: In function `iptables_main':
-/home/chenwz/iptables-1.4.20/iptables/iptables-standalone.c:66: undefined reference to `rtc_commit'
-/home/chenwz/iptables-1.4.20/iptables/iptables-standalone.c:70: undefined reference to `rtc_free'
-xtables_multi-iptables.o: In function `do_command4':
-/home/chenwz/iptables-1.4.20/iptables/iptables.c:1926: undefined reference to `rtc_set_policy'
-/home/chenwz/iptables-1.4.20/iptables/iptables.c:1755: undefined reference to `rtc_init'
-xtables_multi-iptables.o: In function `append_entry':
-/home/chenwz/iptables-1.4.20/iptables/iptables.c:651: undefined reference to `rtc_append'
-collect2: error: ld returned 1 exit status
-make[2]: *** [xtables-multi] Error 1
+In file included from librt4c.c:1:0:
+../include/librtc/librt4c.h:14:8: warning: function declaration isn't a prototype [-Wstrict-prototypes]
+ struct rtc_handle *rtc_init();
+        ^
+librt4c.c:5:18: warning: function declaration isn't a prototype [-Wstrict-prototypes]
+ #define RTC_INIT rtc_init
+                  ^
+librtc.c:45:1: note: in expansion of macro 'RTC_INIT'
+ RTC_INIT(){
+ ^
+In file included from librt4c.c:10:0:
+librtc.c: In function 'rtc_init':
+librtc.c:58:5: warning: implicit declaration of function 'inet_pton' [-Wimplicit-function-declaration]
+     if( inet_pton(AF_INET, "127.0.0.1", &servaddr.sin_addr) <= 0){
+     ^
+librtc.c:85:5: warning: implicit declaration of function 'close' [-Wimplicit-function-declaration]
+     close(sockfd);
+     ^
+librtc.c:46:17: warning: unused variable 'n' [-Wunused-variable]
+  int    sockfd, n;
+                 ^
+librtc.c: In function 'rtc_set_policy':
+librtc.c:106:19: warning: assignment discards 'const' qualifier from pointer target type [enabled by default]
+  property->policy = policy;
+                   ^
+librtc.c:29:32: warning: 'rt' may be used uninitialized in this function [-Wmaybe-uninitialized]
+  list_for_each(plist,(rt->list).prev){
+                                ^
+librtc.c:21:14: note: 'rt' was declared here
+  ruletable * rt;
+              ^
+-e 	+ ./libxt_addrtype.man
+-e 	+ ./libip6t_ah.man
+-e 	+ ./libipt_ah.man
+-e 	+ ./libxt_bpf.man
+-e 	+ ./libxt_cluster.man
+-e 	+ ./libxt_comment.man
+-e 	+ ./libxt_connbytes.man
+-e 	+ ./libxt_connlimit.man
+-e 	+ ./libxt_connmark.man
+-e 	+ ./libxt_conntrack.man
+-e 	+ ./libxt_cpu.man
+-e 	+ ./libxt_dccp.man
+-e 	+ ./libxt_devgroup.man
+-e 	+ ./libxt_dscp.man
+-e 	+ ./libip6t_dst.man
+-e 	+ ./libxt_ecn.man
+-e 	+ ./libxt_esp.man
+-e 	+ ./libip6t_eui64.man
+-e 	+ ./libip6t_frag.man
+-e 	+ ./libxt_hashlimit.man
+-e 	+ ./libip6t_hbh.man
+-e 	+ ./libxt_helper.man
+-e 	+ ./libip6t_hl.man
+-e 	+ ./libipt_icmp.man
+-e 	+ ./libip6t_icmp6.man
+-e 	+ ./libxt_iprange.man
+-e 	+ ./libip6t_ipv6header.man
+-e 	+ ./libxt_ipvs.man
+-e 	+ ./libxt_length.man
+-e 	+ ./libxt_limit.man
+-e 	+ ./libxt_mac.man
+-e 	+ ./libxt_mark.man
+-e 	+ ./libip6t_mh.man
+-e 	+ ./libxt_multiport.man
+-e 	+ ./libxt_nfacct.man
+-e 	+ ./libxt_osf.man
+-e 	+ ./libxt_owner.man
+-e 	+ ./libxt_physdev.man
+-e 	+ ./libxt_pkttype.man
+-e 	+ ./libxt_policy.man
+-e 	+ ./libxt_quota.man
+-e 	+ ./libxt_rateest.man
+-e 	+ ./libipt_realm.man
+-e 	+ ./libxt_recent.man
+-e 	+ ./libxt_rpfilter.man
+-e 	+ ./libip6t_rt.man
+-e 	+ ./libxt_sctp.man
+-e 	+ ./libxt_set.man
+-e 	+ ./libxt_socket.man
+-e 	+ ./libxt_state.man
+-e 	+ ./libxt_statistic.man
+-e 	+ ./libxt_string.man
+-e 	+ ./libxt_tcp.man
+-e 	+ ./libxt_tcpmss.man
+-e 	+ ./libxt_time.man
+-e 	+ ./libxt_tos.man
+-e 	+ ./libipt_ttl.man
+-e 	+ ./libxt_u32.man
+-e 	+ ./libxt_udp.man
+-e 	+ ./libipt_unclean.man
+-e 	+ ./libxt_AUDIT.man
+-e 	+ ./libxt_CHECKSUM.man
+-e 	+ ./libxt_CLASSIFY.man
+-e 	+ ./libipt_CLUSTERIP.man
+-e 	+ ./libxt_CONNMARK.man
+-e 	+ ./libxt_CONNSECMARK.man
+-e 	+ ./libxt_CT.man
+-e 	+ ./libxt_DNAT.man
+-e 	+ ./libip6t_DNPT.man
+-e 	+ ./libxt_DSCP.man
+-e 	+ ./libipt_ECN.man
+-e 	+ ./libip6t_HL.man
+-e 	+ ./libxt_HMARK.man
+-e 	+ ./libxt_IDLETIMER.man
+-e 	+ ./libxt_LED.man
+-e 	+ ./libxt_LOG.man
+-e 	+ ./libxt_MARK.man
+-e 	+ ./libxt_MASQUERADE.man
+-e 	+ ./libipt_MIRROR.man
+-e 	+ ./libxt_NETMAP.man
+-e 	+ ./libxt_NFLOG.man
+-e 	+ ./libxt_NFQUEUE.man
+-e 	+ ./libxt_NOTRACK.man
+-e 	+ ./libxt_RATEEST.man
+-e 	+ ./libxt_REDIRECT.man
+-e 	+ ./libip6t_REJECT.man
+-e 	+ ./libipt_REJECT.man
+-e 	+ ./libipt_SAME.man
+-e 	+ ./libxt_SECMARK.man
+-e 	+ ./libxt_SET.man
+-e 	+ ./libxt_SNAT.man
+-e 	+ ./libip6t_SNPT.man
+-e 	+ ./libxt_TCPMSS.man
+-e 	+ ./libxt_TCPOPTSTRIP.man
+-e 	+ ./libxt_TEE.man
+-e 	+ ./libxt_TOS.man
+-e 	+ ./libxt_TPROXY.man
+-e 	+ ./libxt_TRACE.man
+-e 	+ ./libipt_TTL.man
+-e 	+ ./libipt_ULOG.man
+In file included from ../include/iptables.h:7:0,
+                 from libipt_DNAT.c:6:
+../include/librtc/librt4c.h:14:8: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+ struct rtc_handle *rtc_init();
+        ^
+In file included from ../include/iptables.h:7:0,
+                 from libipt_SNAT.c:6:
+../include/librtc/librt4c.h:14:8: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+ struct rtc_handle *rtc_init();
+        ^
+In file included from ../include/iptables.h:7:0,
+                 from libip6t_DNAT.c:13:
+../include/librtc/librt4c.h:14:8: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+ struct rtc_handle *rtc_init();
+        ^
+In file included from ../include/iptables.h:7:0,
+                 from libip6t_SNAT.c:13:
+../include/librtc/librt4c.h:14:8: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+ struct rtc_handle *rtc_init();
+        ^
+In file included from ../include/iptables.h:7:0,
+                 from iptables-xml.c:15:
+../include/librtc/librt4c.h:14:8: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+ struct rtc_handle *rtc_init();
+        ^
+In file included from ../include/iptables.h:7:0,
+                 from iptables-save.c:17:
+../include/librtc/librt4c.h:14:8: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+ struct rtc_handle *rtc_init();
+        ^
+In file included from ../include/iptables.h:7:0,
+                 from iptables-restore.c:14:
+../include/librtc/librt4c.h:14:8: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+ struct rtc_handle *rtc_init();
+        ^
+In file included from ../include/iptables.h:7:0,
+                 from iptables-standalone.c:38:
+../include/librtc/librt4c.h:14:8: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+ struct rtc_handle *rtc_init();
+        ^
+iptables-standalone.c: In function ‘iptables_main’:
+iptables-standalone.c:68:41: error: dereferencing pointer to incomplete type
+   printf("test here:%s,%s,%s\n",rthandle->property.tablename,rthandle->property.policy,rthandle->actionType);
+                                         ^
+iptables-standalone.c:68:70: error: dereferencing pointer to incomplete type
+   printf("test here:%s,%s,%s\n",rthandle->property.tablename,rthandle->property.policy,rthandle->actionType);
+                                                                      ^
+iptables-standalone.c:68:96: error: dereferencing pointer to incomplete type
+   printf("test here:%s,%s,%s\n",rthandle->property.tablename,rthandle->property.policy,rthandle->actionType);
+                                                                                                ^
+make[2]: *** [xtables_multi-iptables-standalone.o] Error 1
 make[1]: *** [all-recursive] Error 1
 make: *** [all] Error 2

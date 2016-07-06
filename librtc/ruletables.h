@@ -1,3 +1,5 @@
+#ifndef _ruletables_h
+#define _ruletables_h
 #include "linux_list.h"
 
 typedef struct basic_header
@@ -10,9 +12,9 @@ typedef struct basic_header
 
 typedef struct properties
 {
-	char tablename[10];
+	char * tablename;
 	
-	char policy[10];
+	char * policy;
 }properties;
 
 typedef struct ruletable
@@ -21,9 +23,10 @@ typedef struct ruletable
 
 	basic_header head;
 
-	int property;
-	char actionType[10];
-	char actionDesc[10];
+	int priority;
+	char * actionType;
+	char * actionDesc;
 
 	properties property;
 }ruletable;
+#endif
