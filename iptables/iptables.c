@@ -1745,7 +1745,7 @@ int do_command4(int argc, char *argv[], char **table,
 		xtables_free_opts(1);
 		exit(RESOURCE_PROBLEM);
 	}
-
+	
 	if(!*rthandle)
 		*rthandle = rtc_init();
 	/* only allocate handle if we weren't called with a handle */
@@ -1763,6 +1763,8 @@ int do_command4(int argc, char *argv[], char **table,
 		xtables_error(VERSION_PROBLEM,
 			   "can't initialize iptables table `%s': %s",
 			   *table, iptc_strerror(errno));
+	
+	
 	if (command == CMD_APPEND
 	    || command == CMD_DELETE
 	    || command == CMD_CHECK

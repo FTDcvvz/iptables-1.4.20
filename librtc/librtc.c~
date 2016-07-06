@@ -8,7 +8,7 @@
 #include "ruletables.h"
 
 #define CLIENTPORT 3333
-#define BUFFER_SIZE 1024
+#define BUFFER_SIZE 50
 
 struct rtc_handle{
 	struct list_head * head;
@@ -47,14 +47,12 @@ static ruletable * find_policy_place(const char * chain ,const char * tablename,
 struct rtc_handle *
 RTC_INIT(){
 	int    sockfd, n;
-    struct rtc_handle * rthandle = NULL;
     struct sockaddr_in    servaddr;
 
 	if( (sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0){
 	    printf("create socket error: %s(errno: %d)\n", strerror(errno),errno);
 	    exit(0);
 	}
-
 	memset(&servaddr, 0, sizeof(servaddr));
     servaddr.sin_family = AF_INET;
     servaddr.sin_port = htons(CLIENTPORT);
@@ -72,7 +70,7 @@ RTC_INIT(){
     int needRecv=sizeof(struct rtc_handle); //recv a pointer (list_head *)
 		//(e.s ,32bit computer:  4Byte ,64bit computer : 8Byte)
     char *buffer=(char*)malloc(needRecv);
-    rthandle = (struct rtc_handle*)malloc(sizeof(struct rtc_handle));
+    struct rtc_handle * rthandle = (struct rtc_handle*)malloc(needRecv);
     int pos=0;
     int len;
     while(pos < needRecv)
@@ -86,10 +84,11 @@ RTC_INIT(){
         pos+=len;
     }
     memcpy(rthandle,buffer,needRecv);
-
+//	printf("recv buffer addr : %x\n",*buffer);
+//printf("recv buffer addr : %x\n",*rthandle);
+//printf("recv buffer addr : %x\n",rthandle->head);
     close(sockfd);
     free(buffer);
-  //  printf("rtc_init \n");
     return rthandle;
 }
 
@@ -99,8 +98,7 @@ RTC_FREE(struct rtc_handle *h){
 }
 
 int 
-RTC_SET_POLICY(const char * chain ,const char * policy,const char * tablename, struct rtc_handle *handle){
- 	printf("test\n");	
+RTC_SET_POLICY(const char * chain ,const char * policy,const char * tablename, struct rtc_handle *handle){	
 	ruletable * rt = NULL;
 	if((rt = find_policy_place(chain,tablename,handle)) == NULL){
 		printf("find policy place error\n");
