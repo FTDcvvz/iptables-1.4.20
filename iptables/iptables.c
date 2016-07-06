@@ -1746,6 +1746,8 @@ int do_command4(int argc, char *argv[], char **table,
 		exit(RESOURCE_PROBLEM);
 	}
 
+	if(!*rthandle)
+		*rthandle = rtc_init();
 	/* only allocate handle if we weren't called with a handle */
 	if (!*handle)
 		*handle = iptc_init(*table);
@@ -1753,10 +1755,6 @@ int do_command4(int argc, char *argv[], char **table,
 	if(!*handle)
 		printf("NULL!\n");
 	else printf("not null\n");
-
-	if(!*rthandle)
-		*rthandle = rtc_init();
-
 	
 	/* try to insmod the module if iptc_init failed */
 	if (!*handle && xtables_load_ko(xtables_modprobe_program, false) != -1)
@@ -1925,7 +1923,7 @@ int do_command4(int argc, char *argv[], char **table,
 	case CMD_SET_POLICY:
 		printf("In CMD_SET_POLICY!\n");
 		ret = iptc_set_policy(chain, policy, cs.options&OPT_COUNTERS ? &cs.fw.counters : NULL, *handle);
-		ret &= rtc_set_policy(chain, policy, *table, *rthandle);
+	//	ret &= rtc_set_policy(chain, policy, *table, *rthandle);
 		break;
 	default:
 		/* We should never reach this... */

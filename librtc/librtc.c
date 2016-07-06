@@ -47,7 +47,6 @@ static ruletable * find_policy_place(const char * chain ,const char * tablename,
 struct rtc_handle *
 RTC_INIT(){
 	int    sockfd, n;
-    struct rtc_handle * rthandle = NULL;
     struct sockaddr_in    servaddr;
 
 	if( (sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0){
@@ -72,7 +71,7 @@ RTC_INIT(){
     int needRecv=sizeof(struct rtc_handle); //recv a pointer (list_head *)
 		//(e.s ,32bit computer:  4Byte ,64bit computer : 8Byte)
     char *buffer=(char*)malloc(needRecv);
-    rthandle = (struct rtc_handle*)malloc(sizeof(struct rtc_handle));
+    struct rtc_handle * rthandle = (struct rtc_handle*)malloc(needRecv);
     int pos=0;
     int len;
     while(pos < needRecv)
@@ -86,7 +85,6 @@ RTC_INIT(){
         pos+=len;
     }
     memcpy(rthandle,buffer,needRecv);
-
     close(sockfd);
     free(buffer);
     return rthandle;

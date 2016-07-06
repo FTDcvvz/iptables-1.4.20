@@ -1272,7 +1272,6 @@ static struct xtc_handle *
 alloc_handle(const char *tablename, unsigned int size, unsigned int num_rules)
 {
 	struct xtc_handle *h;
-
 	h = malloc(sizeof(*h));
 	if (!h) {
 		errno = ENOMEM;
@@ -1332,7 +1331,7 @@ retry:
 		close(sockfd);
 		return NULL;
 	}
-
+	
 	DEBUGP("valid_hooks=0x%08x, num_entries=%u, size=%u\n",
 		info.valid_hooks, info.num_entries, info.size);
 
@@ -1341,7 +1340,6 @@ retry:
 		close(sockfd);
 		return NULL;
 	}
-
 	/* Initialize current state */
 	h->sockfd = sockfd;
 	h->info = info;
@@ -1353,7 +1351,6 @@ retry:
 	if (getsockopt(h->sockfd, TC_IPPROTO, SO_GET_ENTRIES, h->entries,
 		       &tmp) < 0)
 		goto error;
-
 #ifdef IPTC_DEBUG2
 	{
 		int fd = open("/tmp/libiptc-so_get_entries.blob",
@@ -1364,7 +1361,6 @@ retry:
 		}
 	}
 #endif
-
 	if (parse_table(h) < 0)
 		goto error;
 

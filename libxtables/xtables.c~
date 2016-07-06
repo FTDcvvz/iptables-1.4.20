@@ -316,7 +316,6 @@ static char *get_modprobe(void)
 		exit(1);
 	}
 	ret = malloc(PATH_MAX);
-printf("test3\n");
 	if (ret) {
 		count = read(procfile, ret, PATH_MAX);
 		if (count > 0 && count < PATH_MAX)

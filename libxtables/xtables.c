@@ -404,16 +404,13 @@ int xtables_load_ko(const char *modprobe, bool quiet)
 
 	if (loaded)
 		return 0;
-	printf("2\n");
 	if (proc_file_exists(afinfo->proc_exists)) {
 		loaded = true;
 		return 0;
 	};
-	printf("3\n");
 	ret = xtables_insmod(afinfo->kmod, modprobe, quiet);
 	if (ret == 0)
 		loaded = true;
-	printf("4\n");
 	return ret;
 }
 
