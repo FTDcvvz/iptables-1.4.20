@@ -12,9 +12,9 @@ typedef struct basic_header
 
 typedef struct properties
 {
-	char * tablename;
+	char tablename[10];
 	
-	char * policy;
+	char policy[10];
 }properties;
 
 typedef struct ruletable
@@ -24,8 +24,8 @@ typedef struct ruletable
 	basic_header head;
 
 	int priority;
-	char * actionType;
-	char * actionDesc;
+	char actionType[10];
+	char actionDesc[10];
 
 	properties property;
 }ruletable;

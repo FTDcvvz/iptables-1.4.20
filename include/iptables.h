@@ -9,7 +9,7 @@
 
 /* Your shared library should call one of these. */
 extern int do_command4(int argc, char *argv[], char **table,
-		      struct xtc_handle **handle, struct rtc_handle **rthandle, bool restore);
+		      struct xtc_handle **handle, bool restore);
 extern int delete_chain4(const xt_chainlabel chain, int verbose,
 			struct xtc_handle *handle);
 extern int flush_entries4(const xt_chainlabel chain, int verbose, 

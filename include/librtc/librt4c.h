@@ -11,17 +11,12 @@
 #include <linux/netfilter_ipv4/ip_tables.h>
 
 /* Take a snapshot of the rules.  Returns NULL on error. */
-struct rtc_handle *rtc_init();
-
-/* Cleanup after rtc_init(). */
-void rtc_free(struct rtc_handle *h);
+int rtc_init();
 
 /* Sets the policy */
-int rtc_set_policy(const char * chain ,const char * policy, const char * tablename, 
-		struct rtc_handle *handle);
+int rtc_set_policy(const char * chain ,const char * policy, const char * tablename);
 
 /* Append to chain  */
-int rtc_append(const struct ipt_entry *e, 
-		struct rtc_handle *handle);
+int rtc_append(const struct ipt_entry *e);
 
 #endif/*_LIBRT4C*/

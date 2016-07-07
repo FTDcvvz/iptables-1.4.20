@@ -182,7 +182,6 @@ int
 iptables_restore_main(int argc, char *argv[])
 {
 	struct xtc_handle *handle = NULL;
-	struct rtc_handle *rthandle = NULL;
 	char buffer[10240];
 	int c;
 	char curtable[XT_TABLE_MAXNAMELEN + 1];
@@ -440,7 +439,7 @@ iptables_restore_main(int argc, char *argv[])
 				DEBUGP("argv[%u]: %s\n", a, newargv[a]);
 
 			ret = do_command4(newargc, newargv,
-					 &newargv[2], &handle, &rthandle, true);
+					 &newargv[2], &handle, true);
 
 			free_argv();
 			fflush(stdout);

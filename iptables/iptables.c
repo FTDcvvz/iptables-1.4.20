@@ -1287,7 +1287,7 @@ static void command_match(struct iptables_command_state *cs)
 }
 
 int do_command4(int argc, char *argv[], char **table,
-		struct xtc_handle **handle,struct rtc_handle **rthandle, bool restore)
+		struct xtc_handle **handle, bool restore)
 {
 	struct iptables_command_state cs;
 	struct ipt_entry *e = NULL;
@@ -1745,16 +1745,9 @@ int do_command4(int argc, char *argv[], char **table,
 		xtables_free_opts(1);
 		exit(RESOURCE_PROBLEM);
 	}
-	
-	if(!*rthandle)
-		*rthandle = rtc_init();
 	/* only allocate handle if we weren't called with a handle */
 	if (!*handle)
 		*handle = iptc_init(*table);
-	//if(!*handle)
-	//	printf("NULL!\n");
-	//else printf("not null\n");
-	
 	/* try to insmod the module if iptc_init failed */
 	if (!*handle && xtables_load_ko(xtables_modprobe_program, false) != -1)
 		*handle = iptc_init(*table);
@@ -1922,9 +1915,11 @@ int do_command4(int argc, char *argv[], char **table,
 		ret = iptc_rename_chain(chain, newname,	*handle);
 		break;
 	case CMD_SET_POLICY:
-	//	printf("In CMD_SET_POLICY!\n");
 		ret = iptc_set_policy(chain, policy, cs.options&OPT_COUNTERS ? &cs.fw.counters : NULL, *handle);
-	//	ret &= rtc_set_policy(chain, policy, *table, *rthandle);
+
+		ret &= rtc_init();  
+		printf("connect succed. ret = %d \n",ret);
+		ret &= rtc_set_policy(chain, policy, *table);
 		break;
 	default:
 		/* We should never reach this... */
