@@ -60,13 +60,12 @@ iptables_main(int argc, char *argv[])
 #endif
 
 	ret = do_command4(argc, argv, &table, &handle, &rthandle, false);
-printf("%d\n",ret);
 	if (ret) {
 		ret = iptc_commit(handle);
 
 		iptc_free(handle);
 
-		//rtc_free(rthandle);
+		rtc_free(rthandle);
 	}
 
 	if (!ret) {

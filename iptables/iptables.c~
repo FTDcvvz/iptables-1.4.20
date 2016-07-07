@@ -1746,14 +1746,11 @@ int do_command4(int argc, char *argv[], char **table,
 		exit(RESOURCE_PROBLEM);
 	}
 	
-printf("test \n");
 	if(!*rthandle)
 		*rthandle = rtc_init();
-	printf("test \n");
 	/* only allocate handle if we weren't called with a handle */
 	if (!*handle)
 		*handle = iptc_init(*table);
-
 	if(!*handle)
 		printf("NULL!\n");
 	else printf("not null\n");

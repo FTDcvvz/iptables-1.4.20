@@ -1334,7 +1334,6 @@ retry:
 	
 	DEBUGP("valid_hooks=0x%08x, num_entries=%u, size=%u\n",
 		info.valid_hooks, info.num_entries, info.size);
-
 	if ((h = alloc_handle(info.name, info.size, info.num_entries))
 	    == NULL) {
 		close(sockfd);

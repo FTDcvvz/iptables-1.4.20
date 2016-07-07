@@ -89,12 +89,14 @@ RTC_INIT(){
 //printf("recv buffer addr : %x\n",rthandle->head);
     close(sockfd);
     free(buffer);
+    buffer = NULL;
     return rthandle;
 }
 
 void 
-RTC_FREE(struct rtc_handle *h){
-	free (h);
+RTC_FREE(struct rtc_handle *handle){
+	free (handle);
+	handle = NULL;
 }
 
 int 

@@ -8,7 +8,7 @@
 #include "ruletables.h"
 
 #define CLIENTPORT 3333
-#define BUFFER_SIZE 50
+#define BUFFER_SIZE 10
 
 struct rtc_handle{
 	struct list_head * head;
@@ -53,9 +53,7 @@ RTC_INIT(){
 	    printf("create socket error: %s(errno: %d)\n", strerror(errno),errno);
 	    exit(0);
 	}
-printf("test5\n");
 	memset(&servaddr, 0, sizeof(servaddr));
-printf("test6\n");
     servaddr.sin_family = AF_INET;
     servaddr.sin_port = htons(CLIENTPORT);
     if( inet_pton(AF_INET, "127.0.0.1", &servaddr.sin_addr) <= 0){
@@ -91,12 +89,14 @@ printf("test6\n");
 //printf("recv buffer addr : %x\n",rthandle->head);
     close(sockfd);
     free(buffer);
+    buffer = NULL;
     return rthandle;
 }
 
 void 
-RTC_FREE(struct rtc_handle *h){
-	free (h);
+RTC_FREE(struct rtc_handle *handle){
+	free (handle);
+	handle = NULL;
 }
 
 int 

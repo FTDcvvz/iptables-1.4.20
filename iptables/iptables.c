@@ -1751,10 +1751,9 @@ int do_command4(int argc, char *argv[], char **table,
 	/* only allocate handle if we weren't called with a handle */
 	if (!*handle)
 		*handle = iptc_init(*table);
-
-	if(!*handle)
-		printf("NULL!\n");
-	else printf("not null\n");
+	//if(!*handle)
+	//	printf("NULL!\n");
+	//else printf("not null\n");
 	
 	/* try to insmod the module if iptc_init failed */
 	if (!*handle && xtables_load_ko(xtables_modprobe_program, false) != -1)
@@ -1923,7 +1922,7 @@ int do_command4(int argc, char *argv[], char **table,
 		ret = iptc_rename_chain(chain, newname,	*handle);
 		break;
 	case CMD_SET_POLICY:
-		printf("In CMD_SET_POLICY!\n");
+	//	printf("In CMD_SET_POLICY!\n");
 		ret = iptc_set_policy(chain, policy, cs.options&OPT_COUNTERS ? &cs.fw.counters : NULL, *handle);
 	//	ret &= rtc_set_policy(chain, policy, *table, *rthandle);
 		break;

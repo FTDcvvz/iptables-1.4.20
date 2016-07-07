@@ -1272,7 +1272,9 @@ static struct xtc_handle *
 alloc_handle(const char *tablename, unsigned int size, unsigned int num_rules)
 {
 	struct xtc_handle *h;
+printf("test1\n");
 	h = malloc(sizeof(*h));
+printf("test2\n");
 	if (!h) {
 		errno = ENOMEM;
 		return NULL;
@@ -1331,10 +1333,9 @@ retry:
 		close(sockfd);
 		return NULL;
 	}
-	printf("getsockopt success\n");
+	
 	DEBUGP("valid_hooks=0x%08x, num_entries=%u, size=%u\n",
 		info.valid_hooks, info.num_entries, info.size);
-
 	if ((h = alloc_handle(info.name, info.size, info.num_entries))
 	    == NULL) {
 		close(sockfd);
