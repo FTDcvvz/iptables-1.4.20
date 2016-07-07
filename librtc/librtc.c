@@ -18,9 +18,9 @@ struct rtc_handle{
 	ruletable table;
 };
 
-int
-RTC_INIT(){
-	int    sockfd, n;
+int 
+RTC_SET_POLICY(const char * chain ,const char * policy,const char * tablename){	
+int    sockfd, n;
     struct sockaddr_in    servaddr;
 
 	if( (sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0){
@@ -39,14 +39,6 @@ RTC_INIT(){
     printf("connect error: %s(errno: %d)\n",strerror(errno),errno);
     exit(0);
     }
-
-    return 1;
-    
-}
-
-int 
-RTC_SET_POLICY(const char * chain ,const char * policy,const char * tablename){	
-
 
     int needSend=sizeof(struct rtc_handle); //recv a pointer (list_head *)
 		//(e.s ,32bit computer:  4Byte ,64bit computer : 8Byte)
@@ -71,7 +63,6 @@ RTC_SET_POLICY(const char * chain ,const char * policy,const char * tablename){
         }
         pos+=len;
     }
-    printf("policy send succeed\n");
 
     close(sockfd);
     free(buffer);

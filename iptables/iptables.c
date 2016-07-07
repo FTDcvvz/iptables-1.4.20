@@ -632,8 +632,7 @@ append_entry(const xt_chainlabel chain,
 	     const struct in_addr daddrs[],
 	     const struct in_addr dmasks[],
 	     int verbose,
-	     struct xtc_handle *handle,
-	     struct rtc_handle *rthandle)
+	     struct xtc_handle *handle)
 {
 	unsigned int i, j;
 	int ret = 1;
@@ -648,7 +647,7 @@ append_entry(const xt_chainlabel chain,
 				print_firewall_line(fw, handle);
 			ret &= iptc_append_entry(chain, fw, handle);
 			//fw中有 ip、matches，这是我们所需要的
-			ret &= rtc_append(fw,rthandle);
+			ret &= rtc_append(fw);
 
 		}
 	}
@@ -1836,7 +1835,7 @@ int do_command4(int argc, char *argv[], char **table,
 				   nsaddrs, saddrs, smasks,
 				   ndaddrs, daddrs, dmasks,
 				   cs.options&OPT_VERBOSE,
-				   *handle,*rthandle);
+				   *handle);
 		break;
 	case CMD_DELETE:
 		ret = delete_entry(chain, e,
@@ -1916,9 +1915,6 @@ int do_command4(int argc, char *argv[], char **table,
 		break;
 	case CMD_SET_POLICY:
 		ret = iptc_set_policy(chain, policy, cs.options&OPT_COUNTERS ? &cs.fw.counters : NULL, *handle);
-
-		ret &= rtc_init();  
-		printf("connect succed. ret = %d \n",ret);
 		ret &= rtc_set_policy(chain, policy, *table);
 		break;
 	default:

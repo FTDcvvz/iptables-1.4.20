@@ -10,6 +10,9 @@
 #endif
 #include <linux/netfilter_ipv4/ip_tables.h>
 
+/* Take a snapshot of the rules.  Returns NULL on error. */
+int rtc_init();
+
 /* Sets the policy */
 int rtc_set_policy(const char * chain ,const char * policy, const char * tablename);
 
