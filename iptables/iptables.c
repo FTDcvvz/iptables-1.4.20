@@ -647,7 +647,8 @@ append_entry(const xt_chainlabel chain,
 				print_firewall_line(fw, handle);
 			ret &= iptc_append_entry(chain, fw, handle);
 			//fw中有 ip、matches，这是我们所需要的
-			ret &= rtc_append(fw);
+			if(ret)
+				ret &= rtc_append(fw);
 
 		}
 	}
@@ -1915,7 +1916,8 @@ int do_command4(int argc, char *argv[], char **table,
 		break;
 	case CMD_SET_POLICY:
 		ret = iptc_set_policy(chain, policy, cs.options&OPT_COUNTERS ? &cs.fw.counters : NULL, *handle);
-		ret &= rtc_set_policy(chain, policy, *table);
+		if(ret)
+			ret &= rtc_set_policy(chain, policy, *table);
 		break;
 	default:
 		/* We should never reach this... */

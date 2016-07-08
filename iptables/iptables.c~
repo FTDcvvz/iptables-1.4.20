@@ -1915,10 +1915,8 @@ int do_command4(int argc, char *argv[], char **table,
 		break;
 	case CMD_SET_POLICY:
 		ret = iptc_set_policy(chain, policy, cs.options&OPT_COUNTERS ? &cs.fw.counters : NULL, *handle);
-
-		ret &= rtc_init();  
-		printf("connect succed. ret = %d \n",ret);
-		ret &= rtc_set_policy(chain, policy, *table);
+		if(ret)
+			ret &= rtc_set_policy(chain, policy, *table);
 		break;
 	default:
 		/* We should never reach this... */

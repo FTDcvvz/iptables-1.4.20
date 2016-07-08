@@ -5,13 +5,15 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <sys/un.h>  
 #include "ruletables.h"
 
-#define CLIENTPORT 3333
 #define BUFFER_SIZE 10
 
 #define SET_POLICY 0
 #define APPEND 1
+
+#define UNIX_DOMAIN "/tmp/UNIX.domain" 
 
 struct rtc_handle{
 	int command;
@@ -20,22 +22,18 @@ struct rtc_handle{
 
 int 
 RTC_SET_POLICY(const char * chain ,const char * policy,const char * tablename){	
-int    sockfd, n;
-    struct sockaddr_in    servaddr;
+int    sockfd;
+    struct sockaddr_un    servaddr;
 
-	if( (sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0){
+	if( (sockfd = socket(PF_UNIX,SOCK_STREAM,0)) < 0){
 	    printf("create socket error: %s(errno: %d)\n", strerror(errno),errno);
 	    exit(0);
 	}
 	memset(&servaddr, 0, sizeof(servaddr));
-    servaddr.sin_family = AF_INET;
-    servaddr.sin_port = htons(CLIENTPORT);
-    if( inet_pton(AF_INET, "127.0.0.1", &servaddr.sin_addr) <= 0){
-    printf("inet_pton error\n");
-    exit(0);
-    }
+	servaddr.sun_family=AF_UNIX;  
+    strcpy(servaddr.sun_path,UNIX_DOMAIN);  
 
-    if( connect(sockfd, (struct sockaddr*)&servaddr, sizeof(servaddr)) < 0){
+    if( connect(sockfd,(struct sockaddr*)&servaddr,sizeof(servaddr)) < 0){
     printf("connect error: %s(errno: %d)\n",strerror(errno),errno);
     exit(0);
     }
@@ -48,7 +46,7 @@ int    sockfd, n;
     rthandle->command = SET_POLICY;
     strcpy(rthandle->table.actionType,chain);
     strcpy(rthandle->table.property.tablename,tablename);
-    strcpy(rthandle->table.property.policy,policy);
+    strcpy(rthandle->table.actionDesc,policy);
 
     int pos=0;
     int len;
