@@ -10,16 +10,20 @@
 
 #define BUFFER_SIZE 10
 
-#define SET_POLICY 0
-#define APPEND 1
-
 #define UNIX_DOMAIN "/tmp/UNIX.domain" 
 
-struct rtc_handle{
-	int command;
-	ruletable table;
-};
-
+typedef enum _command_list
+{	SET_POLICY ,
+	APPEND	,
+	INSERT ,
+	DELETE ,
+	CLEAN  ,
+	ALLIN		
+}command_list;
+struct handle{
+    command_list command;
+    ruletable table;
+}; 
 static int conn()
 {
 	int    sockfd;
