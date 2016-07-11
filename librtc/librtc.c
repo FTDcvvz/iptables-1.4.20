@@ -20,10 +20,10 @@ struct rtc_handle{
 	ruletable table;
 };
 
-int 
-RTC_SET_POLICY(const char * chain ,const char * policy,const char * tablename){	
-int    sockfd;
-    struct sockaddr_un    servaddr;
+static int conn()
+{
+	int    sockfd;
+        struct sockaddr_un    servaddr;
 
 	if( (sockfd = socket(PF_UNIX,SOCK_STREAM,0)) < 0){
 	    printf("create socket error: %s(errno: %d)\n", strerror(errno),errno);
@@ -31,22 +31,52 @@ int    sockfd;
 	}
 	memset(&servaddr, 0, sizeof(servaddr));
 	servaddr.sun_family=AF_UNIX;  
-    strcpy(servaddr.sun_path,UNIX_DOMAIN);  
+        strcpy(servaddr.sun_path,UNIX_DOMAIN);  
 
-    if( connect(sockfd,(struct sockaddr*)&servaddr,sizeof(servaddr)) < 0){
-    printf("connect error: %s(errno: %d)\n",strerror(errno),errno);
-    exit(0);
-    }
+        if( connect(sockfd,(struct sockaddr*)&servaddr,sizeof(servaddr)) < 0){
+           printf("connect error: %s(errno: %d)\n",strerror(errno),errno);
+           exit(0);
+        }
+	return sockfd;
+}
 
-    int needSend=sizeof(struct rtc_handle); //recv a pointer (list_head *)
-		//(e.s ,32bit computer:  4Byte ,64bit computer : 8Byte)
+int 
+RTC_SET_POLICY(const char * chain ,const char * policy,const char * tablename){	
+    int sockfd = conn();
+    int needSend=sizeof(struct rtc_handle);
     char *buffer=(char*)malloc(needSend);
     struct rtc_handle* rthandle = (struct rtc_handle*)malloc(needSend);
     //build rthandle
+    
     rthandle->command = SET_POLICY;
-    strcpy(rthandle->table.actionType,chain);
-    strcpy(rthandle->table.property.tablename,tablename);
-    strcpy(rthandle->table.actionDesc,policy);
+
+    if(strcmp(chain,"INPUT") == 0)
+        rthandle->table.actionType = INPUT;
+    else if(strcmp(chain,"OUTPUT") == 0)
+        rthandle->table.actionType = OUTPUT;
+    else if(strcmp(chain,"FORWARD") == 0)
+        rthandle->table.actionType = FORWARD;
+    else if(strcmp(chain,"PREROUTING") == 0)
+        rthandle->table.actionType = PREROUTING;
+    else if(strcmp(chain,"POSTROUTING") == 0)
+        rthandle->table.actionType = POSTROUTING;
+
+    if(strcmp(policy,"ACCEPT") == 0)
+        rthandle->table.actionDesc = ACCEPT;
+    else if(strcmp(policy,"DROP") == 0)
+        rthandle->table.actionDesc = DROP;
+    else if(strcmp(policy,"QUEUE") == 0)
+        rthandle->table.actionDesc = QUEUE;
+    else if(strcmp(policy,"RETURN") == 0)
+        rthandle->table.actionDesc = RETURN;
+	
+
+    if(strcmp(tablename,"filter") == 0)
+        rthandle->table.property.tablename = filter;
+    else if(strcmp(tablename,"nat") == 0)
+        rthandle->table.property.tablename = nat;
+    else if(strcmp(tablename,"mangle") == 0)
+        rthandle->table.property.tablename = mangle;
 
     int pos=0;
     int len;
