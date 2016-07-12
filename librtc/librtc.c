@@ -21,6 +21,7 @@ typedef enum _command_list
 	ALLIN		
 }command_list;
 struct handle{
+    int index;
     command_list command;
     ruletable table;
 }; 
@@ -47,9 +48,9 @@ static int conn()
 int 
 RTC_SET_POLICY(const char * chain ,const char * policy,const char * tablename){	
     int sockfd = conn();
-    int needSend=sizeof(struct rtc_handle);
+    int needSend=sizeof(struct handle);
     char *buffer=(char*)malloc(needSend);
-    struct rtc_handle* rthandle = (struct rtc_handle*)malloc(needSend);
+    struct handle* rthandle = (struct handle*)malloc(needSend);
     //build rthandle
     
     rthandle->command = SET_POLICY;
@@ -64,6 +65,7 @@ RTC_SET_POLICY(const char * chain ,const char * policy,const char * tablename){
         rthandle->table.actionType = PREROUTING;
     else if(strcmp(chain,"POSTROUTING") == 0)
         rthandle->table.actionType = POSTROUTING;
+    else rthandle->table.actionType = TYPE_NONE;
 
     if(strcmp(policy,"ACCEPT") == 0)
         rthandle->table.actionDesc = ACCEPT;
@@ -73,6 +75,7 @@ RTC_SET_POLICY(const char * chain ,const char * policy,const char * tablename){
         rthandle->table.actionDesc = QUEUE;
     else if(strcmp(policy,"RETURN") == 0)
         rthandle->table.actionDesc = RETURN;
+    else rthandle->table.actionDesc = DESC_NONE;
 	
 
     if(strcmp(tablename,"filter") == 0)
@@ -81,6 +84,7 @@ RTC_SET_POLICY(const char * chain ,const char * policy,const char * tablename){
         rthandle->table.property.tablename = nat;
     else if(strcmp(tablename,"mangle") == 0)
         rthandle->table.property.tablename = mangle;
+    else rthandle->table.property.tablename = NAME_NONE;
 
     int pos=0;
     int len;

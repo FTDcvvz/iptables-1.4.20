@@ -4,7 +4,7 @@
 #include "linux_list.h"
 
 typedef enum _action_type{
-    NONE,
+    TYPE_NONE,
     PREROUTING,
     INPUT,
     OUTPUT,
@@ -13,7 +13,7 @@ typedef enum _action_type{
 }ActionType;
 
 typedef enum _action_description{
-    NONE,
+    DESC_NONE,
     ACCEPT,
     DROP,
     QUEUE,
@@ -21,7 +21,7 @@ typedef enum _action_description{
 }ActionDesc;
 
 typedef enum _proto_type{
-    NONE,
+    PROTO_NONE,
     TCP,
     UDP,
     ARP,
@@ -30,7 +30,7 @@ typedef enum _proto_type{
 
 
 typedef enum _table_name{
-        NONE,
+        NAME_NONE,
 	filter,
 	nat,
 	mangle
