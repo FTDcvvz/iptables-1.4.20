@@ -54,7 +54,6 @@ RTC_SET_POLICY(const char * chain ,const char * policy,const char * tablename){
     //build rthandle
     
     rthandle->command = SET_POLICY;
-
     if(strcmp(chain,"INPUT") == 0)
         rthandle->table.actionType = INPUT;
     else if(strcmp(chain,"OUTPUT") == 0)
