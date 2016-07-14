@@ -1,9 +1,0 @@
-prefix=/usr/local
-exec_prefix=${prefix}
-libdir=${exec_prefix}/lib
-includedir=${prefix}/include
-
-Name:	librtc
-Description:	iptables v4/v6 ruletable ADT and kernel interface
-Version:	1.4.20
-Requires:	librt4c librt6c
